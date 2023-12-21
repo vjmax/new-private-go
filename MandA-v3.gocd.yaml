@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  MandA-v2:
+  MandA-v33:
     group: v2_live
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
@@ -25,8 +25,6 @@ pipelines:
         jobs:
           MandA:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -90,8 +88,6 @@ pipelines:
                 run_if: passed
           Manda_Investors:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -163,8 +159,6 @@ pipelines:
                 run_if: passed
           Mama:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -210,8 +204,6 @@ pipelines:
                 run_if: passed
           Mama_Advisor_Companies:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -257,8 +249,6 @@ pipelines:
                 run_if: passed
           Mama_Advisor_Acquirer:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -292,8 +282,6 @@ pipelines:
                 run_if: passed
           Acquirer:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
