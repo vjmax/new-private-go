@@ -1,0 +1,296 @@
+format_version: 10
+pipelines:
+  MandA-v2:
+    group: v2_live
+    label_template: ${COUNT}
+    lock_behavior: unlockWhenFinished
+    display_order: -1
+    timer:
+      spec: 0 0 * ? * *
+      only_on_changes: false
+    materials:
+      git-d00061d:
+        git: https://github.com/vijayk2018/gocd_vi_live
+        shallow_clone: false
+        auto_update: true
+        branch: master
+        encrypted_password: AES:eiGYq2P9eSLPdJjRHGTVig==:Q8a+ZR80VBIjOUaxid4DIw==
+    stages:
+    - MandA:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          MandA:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:exitInvestment
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:company
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:adv_to_exits_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:adv_to_acquirers_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:pevc_inv_exit_filter
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:vccompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan redis:expire:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
+          Manda_Investors:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:exitInvestment
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:investorProfile
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:pevc_inv_exit_filter
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:investors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - redis:expire:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan redis:expire:investors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:vccompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
+          MA_Acquirer_Logo:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                command: php
+                run_if: passed
+          Mama:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:ma-profile
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:ma_investment
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:macompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:ma_acquirers
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:ma_adv_to_companies_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:ma_adv_to_acquirers_filter_flat
+                command: php
+                run_if: passed
+          Mama_Advisor_Companies:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:ma_investment
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:macompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:ma_adv_to_companies_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:ma_adv_to_acquirers_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:ma_l_advisors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:ma_t_advisors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
+          Mama_Advisor_Acquirer:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:macompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:ma_adv_to_acquirers_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:ma_l_advisors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:ma_t_advisors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
+          Acquirer:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:ma_acquirers
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - redis:expire:acquirers
+                command: php
+                run_if: passed
