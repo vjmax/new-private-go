@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  MandA-v2:
+  MandA-v2-red:
     group: v2_live
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
