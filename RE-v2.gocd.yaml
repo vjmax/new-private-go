@@ -1,7 +1,7 @@
 format_version: 10
 pipelines:
   RE-v2:
-    group: v2_live
+    group: v2_live_git
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
     display_order: -1
@@ -25,8 +25,6 @@ pipelines:
         jobs:
           REcompanies:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -48,8 +46,6 @@ pipelines:
                 run_if: passed
           RECompanies_Management:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -110,8 +106,6 @@ pipelines:
                 run_if: passed
           REInvestments_Advisor_Acquirer:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -145,8 +139,6 @@ pipelines:
                 run_if: passed
           REInvestments_Advisor_Companies:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -186,8 +178,6 @@ pipelines:
                 run_if: passed
           REInvestments_Advisor_Investors:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -221,8 +211,6 @@ pipelines:
                 run_if: passed
           REInvestors:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -244,8 +232,6 @@ pipelines:
                 run_if: passed
           REInvestments_Investors:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
