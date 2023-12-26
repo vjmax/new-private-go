@@ -1,7 +1,7 @@
 format_version: 10
 pipelines:
   CFS-COPT:
-    group: v2_live
+    group: v2_live_git
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
     display_order: -1
@@ -25,8 +25,6 @@ pipelines:
         jobs:
           Cprofile:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -72,8 +70,6 @@ pipelines:
                 run_if: passed
           Plstandard:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -107,8 +103,6 @@ pipelines:
                 run_if: passed
           Balancesheet:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
