@@ -1,7 +1,7 @@
 format_version: 10
 pipelines:
   PEVC-v2:
-    group: v2_live
+    group: v2_live_git
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
     display_order: -1
@@ -25,8 +25,6 @@ pipelines:
         jobs:
           PE_Investments:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -96,8 +94,6 @@ pipelines:
                 run_if: passed
           PE_Investments_Investors:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -167,8 +163,6 @@ pipelines:
                 run_if: passed
           Pecompanies:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -190,8 +184,6 @@ pipelines:
                 run_if: passed
           Pecompanies_management:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -207,8 +199,6 @@ pipelines:
                 run_if: passed
           PeinvestmentsAdvisorAcquirer:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -260,8 +250,6 @@ pipelines:
                 run_if: passed
           Peinvestmetns_AdvisorCompanies:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -325,8 +313,6 @@ pipelines:
                 run_if: passed
           Peinvestments_AdvisorInvestors:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -372,8 +358,6 @@ pipelines:
                 run_if: passed
           Peinvestors:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
@@ -413,8 +397,6 @@ pipelines:
                 run_if: passed
           Peinvestors_Management:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
