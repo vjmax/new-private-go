@@ -1,7 +1,7 @@
 format_version: 10
 pipelines:
   Advisors-v2:
-    group: v2_live
+    group: v2_live_git
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
     display_order: -1
