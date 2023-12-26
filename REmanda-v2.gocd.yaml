@@ -1,7 +1,7 @@
 format_version: 10
 pipelines:
   REmanda-v2:
-    group: v2_live
+    group: v2_live_git
     label_template: ${COUNT}
     lock_behavior: lockOnFailure
     display_order: -1
@@ -25,8 +25,6 @@ pipelines:
         jobs:
           REmanda:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
@@ -78,8 +76,6 @@ pipelines:
                 run_if: passed
           RE_manda_Investors:
             timeout: 0
-            resources:
-            - agent-2
             tasks:
             - exec:
                 arguments:
