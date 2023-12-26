@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  IPO-v2:
+  IPO-v2-live:
     group: v2_live_git
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
