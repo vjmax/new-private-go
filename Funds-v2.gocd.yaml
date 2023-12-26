@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  Funds-v2:
+  Funds-v2-live:
     group: v2_live_git
     label_template: ${COUNT}
     lock_behavior: unlockWhenFinished
