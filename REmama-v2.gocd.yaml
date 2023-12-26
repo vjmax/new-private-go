@@ -1,0 +1,142 @@
+format_version: 10
+pipelines:
+  REmama-v2:
+    group: v2_live
+    label_template: ${COUNT}
+    lock_behavior: unlockWhenFinished
+    display_order: -1
+    timer:
+      spec: 0 0 * ? * *
+      only_on_changes: false
+    materials:
+      git-6f81b82:
+        git: https://github.com/vijayk2018/gocd_vi_live
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+    - REmama:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          REmama:
+            timeout: 0
+            resources:
+            - agent-1
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:reother
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:re-profile
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:re_adv_to_other_ma_acquirer_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:re_adv_to_other_ma_companies_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:recompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - redis:expire:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
+          REmama_Advisor_Acquirer:
+            timeout: 0
+            resources:
+            - agent-1
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:re_adv_to_other_ma_acquirer_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:reother
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:re_ladvisors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:re_tadvisors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
+          REmama_Advisor_Companies:
+            timeout: 0
+            resources:
+            - agent-1
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:re_adv_to_other_ma_companies_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:reother
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:re_ladvisors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:re_tadvisors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed

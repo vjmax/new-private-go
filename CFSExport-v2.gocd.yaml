@@ -1,0 +1,36 @@
+format_version: 10
+pipelines:
+  CFSExport-v2:
+    group: v2_live
+    label_template: ${COUNT}
+    lock_behavior: unlockWhenFinished
+    display_order: -1
+    timer:
+      spec: 0 0 * ? * *
+      only_on_changes: false
+    materials:
+      git-02604e7:
+        git: https://github.com/vijayk2018/gocd_vi_live
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+    - ExportLog:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          Export_Log:
+            timeout: 0
+            resources:
+            - agent-2
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - cfsExport:log
+                command: php
+                run_if: passed

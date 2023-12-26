@@ -1,0 +1,131 @@
+format_version: 10
+pipelines:
+  IPO-v2:
+    group: v2_live
+    label_template: ${COUNT}
+    lock_behavior: unlockWhenFinished
+    display_order: -1
+    timer:
+      spec: 0 */45 * ? * *
+      only_on_changes: false
+    materials:
+      git-13cf3eb:
+        git: https://github.com/vijayk2018/gocd_vi_live
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+    - IPOs:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          IPOs:
+            timeout: 0
+            resources:
+            - agent-1
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:ipo
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:ipo_inv_filter
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:vccompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:investors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - redis:expire:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
+          IPOInvestors:
+            timeout: 0
+            resources:
+            - agent-1
+            tasks:
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:ipo_inv_filter
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:investorProfile
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:investors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - redis:expire:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:pecompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - redis:expire:investors
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:vccompanies
+                command: php
+                run_if: passed
