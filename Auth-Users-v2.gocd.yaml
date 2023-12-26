@@ -40,8 +40,6 @@ pipelines:
                 run_if: passed
           RELogin:
             timeout: 0
-            resources:
-            - agent-1
             tasks:
             - exec:
                 arguments:
