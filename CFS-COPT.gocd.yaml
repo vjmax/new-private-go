@@ -40,6 +40,12 @@ pipelines:
             - exec:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
+                - refresh:cfs:export-usd
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
                 - refresh:cprofile:logo
                 command: php
                 run_if: passed
