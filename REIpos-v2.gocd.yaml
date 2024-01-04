@@ -80,6 +80,18 @@ pipelines:
             - exec:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
+                - refresh:tscreate:recompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:re-investor-profile
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
                 - redis:expire:investors
                 command: php
                 run_if: passed
