@@ -122,6 +122,12 @@ pipelines:
             - exec:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
+                - refresh:flat:re-exits
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
                 - refresh:tscreate:re_ladvisors
                 command: php
                 run_if: passed
