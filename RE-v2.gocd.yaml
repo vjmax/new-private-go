@@ -152,7 +152,7 @@ pipelines:
                 - refresh:flat:reinvestment
                 command: php
                 run_if: passed
-             - exec:
+            - exec:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
                 - refresh:flat:re-exits
