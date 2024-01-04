@@ -119,3 +119,9 @@ pipelines:
                 - refresh:tscreate:vccompanies
                 command: php
                 run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - alert:notifications
+                command: php
+                run_if: passed
