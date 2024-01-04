@@ -149,14 +149,6 @@ pipelines:
                 - alert:notifications
                 command: php
                 run_if: passed
-          MA_Acquirer_Logo:
-            timeout: 0
-            tasks:
-            - exec:
-                arguments:
-                - /var/www/files/v2-laravel/artisan
-                command: php
-                run_if: passed
           Mama:
             timeout: 0
             tasks:
@@ -188,6 +180,12 @@ pipelines:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
                 - refresh:create:ma_adv_to_companies_filter_flat
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - redis:expire:pecompanies
                 command: php
                 run_if: passed
             - exec:
@@ -250,10 +248,22 @@ pipelines:
           Mama_Advisor_Acquirer:
             timeout: 0
             tasks:
+             - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:flat:ma_investment
+                command: php
+                run_if: passed
             - exec:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
                 - refresh:tscreate:macompanies
+                command: php
+                run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:create:ma_adv_to_companies_filter_flat
                 command: php
                 run_if: passed
             - exec:
@@ -295,3 +305,10 @@ pipelines:
                 - redis:expire:acquirers
                 command: php
                 run_if: passed
+            - exec:
+                arguments:
+                - /var/www/files/v2-laravel/artisan
+                - refresh:maacquirer:logo
+                command: php
+                run_if: passed
+            
