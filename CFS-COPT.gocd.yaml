@@ -36,6 +36,7 @@ pipelines:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
                 - refresh:cfs:export-inr
+                command: php
                 run_if: passed
             - exec:
                 arguments:
