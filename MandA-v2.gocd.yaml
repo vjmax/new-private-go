@@ -248,7 +248,7 @@ pipelines:
           Mama_Advisor_Acquirer:
             timeout: 0
             tasks:
-             - exec:
+            - exec:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
                 - refresh:flat:ma_investment
