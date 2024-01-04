@@ -29,12 +29,6 @@ pipelines:
             - exec:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
-                - refresh:flat:company
-                command: php
-                run_if: passed
-            - exec:
-                arguments:
-                - /var/www/files/v2-laravel/artisan
                 - refresh:flat:cprofile
                 command: php
                 run_if: passed
@@ -42,10 +36,6 @@ pipelines:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
                 - refresh:cfs:export-inr
-                command: php
-                run_if: passed
-            - exec:
-                arguments:
                 - /var/www/files/v2-laravel/artisan
                 - refresh:cfs:export-usd
                 command: php
@@ -60,12 +50,6 @@ pipelines:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
                 - refresh:tscreate:cfscompanies
-                command: php
-                run_if: passed
-            - exec:
-                arguments:
-                - /var/www/files/v2-laravel/artisan
-                - refresh:flat:company
                 command: php
                 run_if: passed
           Plstandard:
