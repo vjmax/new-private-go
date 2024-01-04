@@ -59,12 +59,6 @@ pipelines:
             - exec:
                 arguments:
                 - /var/www/files/v2-laravel/artisan
-                - refresh:tscreate:investors
-                command: php
-                run_if: passed
-            - exec:
-                arguments:
-                - /var/www/files/v2-laravel/artisan
                 - redis:expire:pecompanies
                 command: php
                 run_if: passed
